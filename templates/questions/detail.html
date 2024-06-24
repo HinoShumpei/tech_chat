@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+タイトル：{{ question.title}}<br>
+質問内容：{{ question.content}}<br>
+投稿者名：{{ question.name}}
+
+<form method="post" action="{% url 'questions:answers:answer' pk=question.id %}">
+{% csrf_token %}
+  {{ form.content }}<br>
+  {{ form.name }}<br>
+  <input type="submit" value="POST">
+</form>
+
+
+{% for answer in answers %}
+  回答：{{ answer.content }}<br>
+  投稿者名：{{ answer.name }}<br>
+{% endfor %}
+
+{% endblock content %}
